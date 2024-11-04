@@ -21,3 +21,15 @@ class BlogListView(generics.ListAPIView):
     def get_serializer_context(self):
         return {'request': self.request}
 
+
+class BlogCreateView(generics.CreateAPIView):
+    queryset = Blog.objects.all
+    serializer_class = BlogSerializer
+
+    @swagger_auto_schema(
+        tags=['blog'],
+        operation_description="Этот эндпоинт позволяет создать новое месторождение."
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
