@@ -7,6 +7,18 @@ from blog.models import *
 from blog.serializers import *
 
 
+class CategoryCreateView(generics.CreateAPIView):
+    queryset = Category.objects.all
+    serializer_class = CategorySerializer
+
+    @swagger_auto_schema(
+        tags=['category'],
+        operation_description="Этот эндпоинт позволяет создать новую категорию."
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
