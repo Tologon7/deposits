@@ -1,10 +1,21 @@
-from django.shortcuts import render
-
-from rest_framework import generics
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import generics
+from rest_framework import status
+from rest_framework.generics import CreateAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from blog.models import *
 from blog.serializers import *
+from .serializers import BlogImageSerializer
+
+
+class BlogImageUploadView(CreateAPIView):
+    serializer_class = BlogImageSerializerCreate
+
+    def perform_create(self, serializer):
+        blog_id = self.request.data.get('blog')
+        blog = Blog.objects.get(id=blog_id)  # Получаем блог по ID
+        serializer.save(blog=blog)  # Связываем изображение с блогом
 
 
 class CategoryCreateView(generics.CreateAPIView):

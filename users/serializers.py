@@ -39,9 +39,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         validated_data['otp_created_at'] = timezone.now()
 
         send_mail(
-            'Новый пользователь!',
-            f"Имя: {validated_data['first_name']} {validated_data['last_name']} хочет зарегистрироваться.\n"
-            f"Email: {validated_data['email']}\nКод для подтверждения: {otp_code}",
+            'Новый сотрудник!',
+            f"Сотрудник {validated_data['first_name']} {validated_data['last_name']} хочет зарегистрироваться.\n"
+            f"Email: {validated_data['email']}\nUsername: {validated_data['username']}\nКод для подтверждения: {otp_code}",
             'email',
             ['kubandykovtologon@gmail.com'],
             fail_silently=False,
