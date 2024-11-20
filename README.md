@@ -6,38 +6,38 @@
 
 1. Клонируйте репозиторий на вашу локальную машину:
    ```bash
-   git clone https://github.com/Tologon7/deposits.git
-Перейдите в директорию проекта:
-
-cd имя-проекта
-Создайте и активируйте виртуальное окружение: Для Linux/macOS:
-
-python3 -m venv venv
-source env/bin/activate
-
-
-Для Windows:
-
-python -m venv venv
-env\Scripts\activate
+   git clone https://github.com/Tologon7/deposits.git //имя проекта
+2. Перейдите в директорию проекта:
+   ```bash
+   cd имя-проекта
+3. Создайте и активируйте виртуальное окружение: Для Linux/macOS:
+   ```bash
+   python3 -m venv venv
+   source env/bin/activate
 
 
-Установите все необходимые зависимости:
+4. Для Windows:
+   ```bash
+   python -m venv venv
+   env\Scripts\activate
 
-pip3 install -r requirements.txt
+
+5. Установите все необходимые зависимости:
+   ```bash
+   pip3 install -r requirements.txt
 
 
-Выполните миграции базы данных:
-
-python3 manage.py migrate
+6. Выполните миграции базы данных:
+   ```bash
+   python3 manage.py migrate
 
 
 Запуск проекта
 После установки зависимостей и выполнения миграций, вы можете запустить сервер:
 
-Запустите сервер командой:
-
-python manage.py runserver
+7. Запустите сервер командой:
+   ```bash
+   python manage.py runserver
 
 Сервер будет запущен на локальном адресе. Обычно это http://127.0.0.1:8000/, но если адрес другой, он будет выведен в терминале.
 
