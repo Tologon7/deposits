@@ -62,21 +62,21 @@ class BlogIdView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BlogSerializer
 
     @swagger_auto_schema(
-        tags=['color'],
+        tags=['blog'],
         operation_description="Этот эндпоинт позволяет получить, обновить или удалить месторождение по ID."
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        tags=['color'],
+        tags=['blog'],
         operation_description="Этот эндпоинт позволяет обновить(присвоить другие данные) месторождение по ID."
     )
     def put(self, request, *args, **kwargs):
         return super().put(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        tags=['color'],
+        tags=['blog'],
         operation_description="Этот эндпоинт позволяет удалить месторождение по ID."
     )
     def delete(self, request, *args, **kwargs):
