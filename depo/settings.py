@@ -10,12 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-<<<<<<< HEAD
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
-=======
->>>>>>> 9abb312 (optimizet for deploy)
 import ssl
 from datetime import timedelta
 from pathlib import Path

@@ -7,8 +7,6 @@ from .serializers import *
 
 
 class UserLoginView(TokenObtainPairView):
-    """Эндпоинт для входа пользователя с использованием токенов JWT."""
-
     serializer_class = UserLoginSerializer
 
     @swagger_auto_schema(

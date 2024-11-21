@@ -26,10 +26,3 @@ class BlogImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.blog.name}"
-
-
-
-
-# динамическое фото
-# push github
-# README.txt
