@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
-import certifi
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
