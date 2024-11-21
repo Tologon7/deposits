@@ -190,4 +190,10 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
+    'https://deposits.onrender.com'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://deposits.onrender.com',  # Добавьте сюда ваш домен
+    'https://www.deposits.onrender.com',  # Добавьте этот домен, если используется www
 ]
