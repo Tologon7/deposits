@@ -12,6 +12,10 @@ from .serializers import BlogImageSerializer
 class BlogImageUploadView(CreateAPIView):
     serializer_class = BlogImageSerializerCreate
 
+    @swagger_auto_schema(
+        tags=['blog'],
+        operation_description="Этот эндпоинт позволяет создать новое изображение и присвоить его в одну из постов."
+    )
     def perform_create(self, serializer):
         blog_id = self.request.data.get('blog')
         blog = Blog.objects.get(id=blog_id)  # Получаем блог по ID
