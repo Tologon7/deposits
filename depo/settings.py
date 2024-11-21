@@ -19,6 +19,7 @@ from decouple import config
 import ssl
 from datetime import timedelta
 from pathlib import Path
+import certifi
 
 from decouple import config
 
