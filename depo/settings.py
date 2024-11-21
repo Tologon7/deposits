@@ -10,10 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+<<<<<<< HEAD
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+=======
+>>>>>>> 9abb312 (optimizet for deploy)
 import ssl
+from datetime import timedelta
+from pathlib import Path
+
+from decouple import config
+
 ssl._create_default_https_context = ssl._create_unverified_context
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
