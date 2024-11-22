@@ -194,6 +194,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://deposits.onrender.com',  # Добавьте сюда ваш домен
-    'https://www.deposits.onrender.com',  # Добавьте этот домен, если используется www
+    'https://deposits.onrender.com',
+    'https://www.deposits.onrender.com',
 ]
