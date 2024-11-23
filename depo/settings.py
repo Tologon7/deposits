@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'myprojectdb',
         'USER': 'myprojectuser',
         'PASSWORD': 'Gerdsman2007!',
-        'HOST': '127.0.0.1',
+        'HOST': 'depo-goy6.onrender.com',
         'PORT': '5432',
     }
 }
