@@ -192,5 +192,6 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://deposits.onrender.com',
     'https://www.deposits.onrender.com',
-    'https://depo-goy6.onrender.com'
+    'https://depo-goy6.onrender.com',
+    'https://depos.onrender.com'
 ]
