@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from blog.models import *
 
 
@@ -23,7 +24,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ['id', 'name', 'category', 'description', 'coordinates1', 'coordinates2', 'images']
+        fields = ['id', 'name', 'category', 'description', 'latitude', 'longitude', 'images']
 
 
 class CategorySerializer(serializers.ModelSerializer):

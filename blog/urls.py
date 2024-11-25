@@ -1,7 +1,6 @@
 from django.urls import path
-from blog.views import *
-from django.views.decorators.cache import cache_page
 
+from blog.views import *
 
 urlpatterns = [
     #blog

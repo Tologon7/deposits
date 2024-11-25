@@ -1,5 +1,6 @@
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import generics, status
+from rest_framework import status
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -15,16 +16,25 @@ class UserLoginView(TokenObtainPairView):
                               "После успешного входа генерируются Access и Refresh токены."
     )
     def post(self, request, *args, **kwargs):
-        # Используем сериализатор для получения данных
+        # Используем сериализатор для обработки данных
         serializer = self.get_serializer(data=request.data)
 
-        # Проверяем, валидны ли данные
-        if serializer.is_valid(raise_exception=True):
-            validated_data = serializer.validated_data
-            tokens = {
-                'access': str(validated_data['access']),
-                'refresh': str(validated_data['refresh']),
-            }
-            return Response({'tokens': tokens}, status=status.HTTP_200_OK)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except Exception as e:
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # Если данные валидны, извлекаем токены
+        tokens = serializer.validated_data
+        return Response({
+            'access': str(tokens['access']),
+            'refresh': str(tokens['refresh']),
+        }, status=status.HTTP_200_OK)
+
+
+
+class UsersListView(ListAPIView):
+    serializer_class = UserListSerializer
+
+    def get_queryset(self):
+        return User.objects.all()

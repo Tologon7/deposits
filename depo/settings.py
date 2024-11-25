@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import ssl
 from datetime import timedelta
 from pathlib import Path
 
@@ -159,7 +158,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 DEFAULT_FROM_EMAIL = 'kubandykovtologon@gmail.com'
 # EMAIL_SSL_CERTFILE = certifi.where()
-
 
 
 AUTH_USER_MODEL = 'users.User'
