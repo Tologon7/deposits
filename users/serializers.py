@@ -5,11 +5,19 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from users.models import *
 
 
-class UserLoginSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data['user'] = self.user
-        return data
+class LoginSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password', 'placeholder': 'Password'}
+    )
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'password',
+        ]
 
 
 class UserLogoutSerializer(serializers.Serializer):

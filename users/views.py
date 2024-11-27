@@ -1,36 +1,47 @@
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.exceptions import AuthenticationFailed
 
 from .serializers import *
 
 
-class UserLoginView(TokenObtainPairView):
-    serializer_class = UserLoginSerializer
+class LoginView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
 
     @swagger_auto_schema(
         tags=['Authentication'],
-        operation_description="Этот эндпоинт позволяет пользователям войти в систему, предоставив имя пользователя и пароль. "
-                              "После успешного входа генерируются Access и Refresh токены."
+        operation_description="Этот эндпоинт предоставляет "
+                              "возможность пользователям войти "
+                              "в систему, предоставив имя пользователя "
+                              "и пароль. После успешного входа, система "
+                              "генерирует Access Token и Refresh Token для "
+                              "пользователя, которые можно использовать для "
+                              "доступа к защищенным ресурсам. \nСрок действия 'access' токена - "
+                              "60 минут, а refresh токена - 30 дней.",
     )
-    def post(self, request, *args, **kwargs):
-        # Используем сериализатор для обработки данных
-        serializer = self.get_serializer(data=request.data)
+    def post(self, request):
+        username = request.data["username"]
+        password = request.data["password"]
 
-        try:
-            serializer.is_valid(raise_exception=True)
-        except Exception as e:
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        user = User.objects.filter(username=username).first()
 
-        # Если данные валидны, извлекаем токены
-        tokens = serializer.validated_data
-        return Response({
-            'access': str(tokens['access']),
-            'refresh': str(tokens['refresh']),
-        }, status=status.HTTP_200_OK)
+        if user is None:
+            return Response({"error": "User not found!"}, status.HTTP_404_NOT_FOUND)
+        if not user.check_password(password):
+            raise AuthenticationFailed({"error": "Incorrect password!"})
 
+        refresh = RefreshToken.for_user(user)
+
+        return Response(
+            {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            }
+        )
 
 
 class UsersListView(ListAPIView):
@@ -38,3 +49,20 @@ class UsersListView(ListAPIView):
 
     def get_queryset(self):
         return User.objects.all()
+
+
+class UserMeView(generics.RetrieveAPIView):
+    serializer_class = UserListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+    @swagger_auto_schema(
+        tags=['Authentication'],
+        operation_description="Этот ендпоинт предоставляет "
+                              "возможность получить информацию "
+                              "о текущем аутентифицированном пользователе. ",
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
