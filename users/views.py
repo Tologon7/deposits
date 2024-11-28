@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, generics
 from rest_framework.generics import ListAPIView
@@ -43,6 +44,44 @@ class LoginView(generics.GenericAPIView):
             }
         )
 
+# class LoginView(generics.GenericAPIView):
+#     serializer_class = LoginSerializer
+#
+#     @swagger_auto_schema(
+#         tags=['Authentication'],
+#         operation_description=(
+#             "Этот эндпоинт предоставляет возможность пользователям войти "
+#             "в систему, предоставив имя пользователя и пароль. После успешного входа, "
+#             "система генерирует Access Token и Refresh Token для пользователя, которые "
+#             "можно использовать для доступа к защищенным ресурсам. \nСрок действия 'access' токена - "
+#             "60 минут, а refresh токена - 30 дней."
+#         ),
+#     )
+#     def post(self, request):
+#         username = request.data.get("username")
+#         password = request.data.get("password")
+#
+#         if not username or not password:
+#             return Response(
+#                 {"error": "Username and password are required."},
+#                 status=status.HTTP_400_BAD_REQUEST,
+#             )
+#
+#         # Аутентификация через встроенный метод
+#         user = authenticate(username=username, password=password)
+#
+#         if user is None:
+#             raise AuthenticationFailed({"error": "Invalid username or password."})
+#
+#         # Генерация токенов для пользователя
+#         refresh = RefreshToken.for_user(user)
+#         return Response(
+#             {
+#                 "refresh": str(refresh),
+#                 "access": str(refresh.access_token),
+#             },
+#             status=status.HTTP_200_OK,
+#         )
 
 class UsersListView(ListAPIView):
     serializer_class = UserListSerializer
