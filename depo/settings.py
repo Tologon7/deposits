@@ -198,3 +198,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://depo-goy6.onrender.com',
     'https://depos.onrender.com'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
