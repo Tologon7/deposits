@@ -91,11 +91,10 @@ WSGI_APPLICATION = 'depo.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        "postgresql://drf_user:0k2YHaUIWpe1HjSGwBbtTXkhZmJt6ITT@dpg-ct3h8vggph6c73burub0-a.oregon-postgres.render.com/drf_database_7key",
-        conn_max_age=600,  # Кэш соединений (секунды)
-        ssl_require=True   # Использовать SSL для подключения
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
